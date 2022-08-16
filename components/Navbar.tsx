@@ -2,8 +2,8 @@ import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 // import { useRouter } from 'next/router';
-// import { AiOutlineLogout } from 'react-icons/ai';
-import { GoogleLogin } from '@react-oauth/google';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 // import { BiSearch } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import Logo from '../utils/tiktik-logo.png';
@@ -11,7 +11,7 @@ import { createOrGetUser } from '../utils';
 import useAuthStore from '../store/authStore';
 
 const Navbar = () => {
-	const {userProfile, addUser} = useAuthStore();
+	const { userProfile, addUser, removeUser } = useAuthStore();
 
 	return (
 		<div className="w-full flex justify-between items-center border-b-2 border-gray-200 py-2 px-4">
@@ -45,16 +45,25 @@ const Navbar = () => {
 											<>
 												<Image
 													src={userProfile.image}
-													width={62}
-													height={62}
-													className="rounded-full"
+													width={40}
+													height={40}
+													className="rounded-full cursor-pointer"
 													alt="profile photo"
-													layout="responsive"
 												/>
 											</>
 										</Link>
 									)
 								}
+								<button
+									type="button"
+									className="px-2"
+									onClick={() => {
+										googleLogout();
+										removeUser();
+									}}
+								>
+									<AiOutlineLogout color="red" fontSize={21}/>
+								</button>
 							</div>
 						)
 						: (
