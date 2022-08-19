@@ -14,7 +14,7 @@ interface IProps {
 // Doing the next page type is useful for more complex types.
 // This is helpful, so you don't have to destructure all the props.
 // Which in turn means you can just have a prop as post like below.
-const VideoCard: NextPage<IProps> = ({post}) => {
+const VideoCard: NextPage<IProps> = ({ post }) => {
 
 	const [isHover, setIsHover] = useState(false);
 	const [playing, setPlaying] = useState(false);
@@ -102,7 +102,7 @@ const VideoCard: NextPage<IProps> = ({post}) => {
 					onMouseEnter={() => setIsHover(true)}
 					onMouseLeave={() => setIsHover(false)}
 					className="rounded-3xl">
-					<Link href="/">
+					<Link href={`/detail/${post._id}`}>
 						<video
 							loop
 							src={post.video.asset.url}
